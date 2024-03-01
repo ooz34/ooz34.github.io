@@ -99,15 +99,20 @@ export const getPostList = graphql`
           frontmatter {
             title
             summary
-            date(formatString: "YYYY.MM.DD")
+            date(formatString: "YYYY.MM.DD.")
             categories
             thumbnail {
               childImageSharp {
-                gatsbyImageData
+                gatsbyImageData(width: 768, height: 400)
               }
             }
           }
         }
+      }
+    }
+    file(name: { eq: "profile-image" }) {
+      childImageSharp {
+        gatsbyImageData(width: 120, height: 120)
       }
     }
   }
