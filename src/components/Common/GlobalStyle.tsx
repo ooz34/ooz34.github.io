@@ -29,6 +29,32 @@ const defaultStyle = css`
     text-decoration: none;
     cursor: pointer;
   }
+
+  body {
+    --sb-track-color: rgba(229, 227, 228, 0);
+    --sb-thumb-color: #bbc6c8;
+    --sb-size: 14px;
+  }
+
+  body::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
+
+  body::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 5px;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    body {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+  }
 `
 
 const GlobalStyle: FunctionComponent = function () {
