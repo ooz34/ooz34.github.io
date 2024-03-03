@@ -12,7 +12,7 @@ type TemplateProps = {
   children: ReactNode
 }
 
-const Container = styled.div`
+const Container = styled.main`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -40,6 +40,8 @@ const Template: FunctionComponent<TemplateProps> = function ({
         <meta property="og:image" content={image} />
         <meta property="og:url" content={url} />
         <meta property="og:site_name" content={title} />
+
+        <html lang="ko" />
       </Helmet>
       <GlobalStyle />
       {children}
