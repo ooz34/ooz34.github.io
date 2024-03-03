@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react'
 import { graphql } from 'gatsby'
 import Template from 'components/Common/Template'
 import PostHead from 'components/Post/PostHead'
-import { PostFrontmatterType } from 'types/PostItem.types'
 import PostContent from 'components/Post/PostContent'
 import CommentWidget from 'components/Post/CommentWidget'
+import { PostPageItemType } from 'types/PostItem.types'
 
 type PostTemplateProps = {
   data: {
@@ -12,12 +12,16 @@ type PostTemplateProps = {
       edges: PostPageItemType[]
     }
   }
+  location: {
+    href: string
+  }
 }
 
 const PostTemplate: FunctionComponent<PostTemplateProps> = function ({
   data: {
     allMarkdownRemark: { edges },
   },
+  location: { href },
 }) {
   const {
     node: {
@@ -29,13 +33,14 @@ const PostTemplate: FunctionComponent<PostTemplateProps> = function ({
         categories,
         thumbnail: {
           childImageSharp: { gatsbyImageData },
+          publicURL,
         },
       },
     },
   } = edges[0]
 
   return (
-    <Template>
+    <Template title={title} description={summary} url={href} image={publicURL}>
       <PostHead
         title={title}
         date={date}
@@ -59,12 +64,13 @@ export const queryMarkdownDataBySlug = graphql`
           frontmatter {
             title
             summary
-            date(formatString: "YYYY.MM.DD")
+            date(formatString: "YYYY.MM.DD.")
             categories
             thumbnail {
               childImageSharp {
                 gatsbyImageData
               }
+              publicURL
             }
           }
         }
@@ -72,10 +78,3 @@ export const queryMarkdownDataBySlug = graphql`
     }
   }
 `
-
-export type PostPageItemType = {
-  node: {
-    html: string
-    frontmatter: PostFrontmatterType
-  }
-}
