@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Ahra's Devlog`,
+    description: `Junior developer's journal. Records TIL, development challenges, and more.`,
+    author: `Ahra`,
+    siteUrl: 'https://ooz34.github.io/',
   },
   plugins: [
     {
@@ -10,6 +11,13 @@ module.exports = {
       options: {
         isTSX: true,
         allExtensions: true,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: 'https://ooz34.github.io/',
+        stripQueryString: true,
       },
     },
     `gatsby-plugin-react-helmet`,
